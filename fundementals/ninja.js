@@ -21,3 +21,4 @@ class Ninja {
         this.health += 10;
     }
 }
+    
