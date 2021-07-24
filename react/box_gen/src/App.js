@@ -1,23 +1,17 @@
-import logo from './logo.svg';
+import Box from './Box';
+import Color from './Color';
+import  { useState } from  'react';
 import './App.css';
 
 function App() {
+  const [currentMsg,setCurrentMsg]=useState([]);
+  const add=(sm)=>{
+    setCurrentMsg([...Array.from(currentMsg),sm]);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Color add={add}></Color>
+        <Box sec={currentMsg}></Box>
     </div>
   );
 }
