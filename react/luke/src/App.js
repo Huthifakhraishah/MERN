@@ -1,22 +1,30 @@
-import React,{useState} from 'react';
+
 import './App.css';
-import {Router} from '@reach/router';
-import Serach from './Components/Serach';
-import Errors from './Components/Errors';
-import Catefory from './Components/Catefory';
+import Serach from './components/Serach'
+import {useState} from 'react';
+import Display from './components/Display';
+import { Router } from '@reach/router';
+import { navigate } from '@reach/router'
+
 
 function App() {
-  const [currentMsg,setCurrentMsg]=useState([]);
-  const add=(sm)=>{
-    setCurrentMsg([...Array.from(currentMsg),sm]);
+  const[title, setTitle] = useState("");
+  const[id, setId] = useState(null);
+
+  const addTitleId = (title, id) =>{
+    setTitle(title);
+    setId(id);
+    navigate(`/${title}/${id}`);
   }
+  
   return (
     <div className="App">
-      <Serach/>
-      <Router>
-          <Catefory path="/:cCategory/:id/"/>
-          <Errors path="/error/"/>
+    
+      <Serach addTitleId={addTitleId}/> 
+      <Router>     
+        <Display path="/:title/:id"/>
       </Router>
+
     </div>
   );
 }

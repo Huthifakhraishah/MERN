@@ -1,46 +1,40 @@
-import React,{ useState } from 'react'
+import React, {useState} from 'react'
+import { navigate } from '@reach/router'
 
-import { navigate } from '@reach/router';
-const Serach = props => {
-    const [formState, setFormState] = useState({
-        category: "people",
-        id: ""
-    });
-    const onChange = e => {
-        setFormState({
-            ...formState,
-            [e.target.name]: e.target.value
-        });
+const Serach = (props) => {
+    const [id,setId]=useState("")
+    const titles = [
+        'people',
+        'planets'
+    ]
+    const [selectedTitle, setSelectedTitle] = useState(titles[0]) 
+
+    const addTitle= (e) => {
+        setSelectedTitle(e.target.value);
     }
-    const onSubmit = e => {
+
+    const addId= (e) => {
+        setId( e.target.value);  
+    }
+
+    const handleSearch = (e) => {
         e.preventDefault();
-        navigate('/' + formState.category + '/' + formState.id);
+        props.addTitleId(selectedTitle, id);
     }
     return (
         <div>
-            <h1>Luke API Walker</h1>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <label>Search For:</label>
-                    <select name="category" onChange={onChange}>
-                        <option value="people">People</option>
-                        <option value="planets">Planets</option>
-                        <option value="starships">Spaceships</option>
-                        <option value="vehicles">Vehicles</option>
-                        <option value="species">Species</option>
-                        <option value="films">Films</option>
-                    </select>
-                </div>
-                <div className="box">
-                    <label>ID:</label>
-                    <input type="number" name="id" onChange={onChange}/>
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
+            <form onSubmit={handleSearch}>
+                <label>Search for: </label>
+                <select value={selectedTitle} onChange={addTitle}>
+                    {titles.map((title, index) => (
+                        <option  key={index} value={title}>{title}</option>
+                    ))}
+                </select>
+                <input type="number" onChange={addId}/>
+                <input type="submit" value="Search"/>
             </form>
         </div>
-        )
+    )
 }
 
 export default Serach
