@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from 'react';
 import io from 'socket.io-client';
 import './App.css';
-import Chat from './components/Chat';
+import Chat from './components/Chat'
 
 function App() {
-  
-  const [socket] = useState(() => io(':8000'))
+
+  const [socket, setState] = useState(io(":8000"));
 
   useEffect(() => {
-    console.log(`is this running`);
-    socket.on('Welcome', data => console.log(data));
-    return () => socket.disconnect(true)
+    console.log("Is the App working?")
+    socket.on("Welcome", data => console.log(data));
   })
   return (
     <div className="App">
-      <h1>Socket Test</h1>
+      <h1>Chat App</h1>
+      <hr/>
       <Chat/>
     </div>
   );
