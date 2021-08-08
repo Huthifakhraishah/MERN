@@ -1,9 +1,8 @@
-const PlayerController = require("../controllers/player.controller");
-
-module.exports = app => {
-  app.get("/api/users/", UserController.findAllUsers);
-  app.get("/api/users/:id", UserController.findOneSingleUser);
-  app.put("/api/users/update/:id", UserController.updateExistingUser);
-  app.post("/api/users/new", UserController.createNewUser);
-  app.delete("/api/users/delete/:id", UserController.deleteAnExistingUser);
+const playerController = require('../controllers/player.controller');
+module.exports = (app) => {
+    app.post('/api/player', playerController.createPlayer);
+    app.get('/api/player', playerController.findAllPlayers);
+    app.get('/api/player/:id', playerController.findOnePlayer);
+    app.put('/api/player/:id', playerController.updatePlayer);
+    app.delete('/api/player/:id', playerController.deletePlayer);
 };

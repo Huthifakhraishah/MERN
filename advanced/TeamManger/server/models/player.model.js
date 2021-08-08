@@ -1,11 +1,28 @@
 const mongoose = require("mongoose");
 
 const PlayerSchema = new mongoose.Schema({
-playerName:{type:String},
-preferedPostion:{type:String},
-Game1:{type:String},
-Game2:{type:String},
-Game3:{type:String},
-},{timestamps:true});
+    name: {
+        type: String,
+        required: [
+            true,
+            "Name is required"
+        ],
+        minlength: [
+            2,
+            "Name must be at least 2 characters in length."
+        ]
+    },
+    position: {
+        type: String,
+        required: [
+            false
+        ]
+    },
+    status: {
+        game1: {type: Number},
+        game2: {type: Number},
+        game3: {type: Number}
+    }
+}, {timestamps: true});
 
-module.exports.Player=mongoose.model('Player',PlayerSchema);
+module.exports.Player = mongoose.model("Player", PlayerSchema);
